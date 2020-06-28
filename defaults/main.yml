@@ -1,0 +1,18 @@
+---
+freeipa_client_packages:
+  - freeipa-client
+
+freeipa_client_principal: ~
+freeipa_client_password: ~
+freeipa_client_ca_cert_file: ~
+freeipa_client_domain: ~
+freeipa_client_server: ~
+freeipa_client_realm: ~
+freeipa_client_hostname: "{{ ansible_fqdn }}"
+freeipa_client_configure_ntp: true
+freeipa_client_configure_ssh: true
+freeipa_client_configure_sshd: true
+freeipa_client_ssh_trust_dns: true
+freeipa_client_configure_sudo: true
+freeipa_client_make_home_dir: true
+freeipa_client_request_cert: true

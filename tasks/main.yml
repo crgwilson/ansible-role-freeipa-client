@@ -1,0 +1,33 @@
+---
+- fail:
+    msg: Missing required vars
+  when: not freeipa_client_principal or
+        not freeipa_client_password or
+        not freeipa_client_domain or
+        not freeipa_client_server or
+        not freeipa_client_realm
+
+- name: Install FreeIPA client
+  package:
+    name: "{{ freeipa_client_packages }}"
+    state: present
+
+- name: Enroll FreeIPA client
+  command: >
+    ipa-client-install
+    --principal={{ freeipa_client_principal }}
+    --password={{ freeipa_client_password }}
+    {{ '--ca-cert-file=' + freeipa_client_ca_cert_file if freeipa_client_ca_cert_file else '' }}
+    --domain={{ freeipa_client_domain }}
+    --server={{ freeipa_client_server }}
+    --realm={{ freeipa_client_realm }}
+    --hostname={{ freeipa_client_hostname }}
+    {{ '--no-ntp' if not freeipa_client_configure_ntp else '' }}
+    {{ '--no-ssh' if not freeipa_client_configure_ssh else '' }}
+    {{ '--no-sshd' if not freeipa_client_configure_sshd else '' }}
+    {{ '--ssh-trust-dns' if freeipa_client_ssh_trust_dns else '' }}
+    {{ '--no-sudo' if not freeipa_client_configure_sudo else '' }}
+    {{ '--mkhomedir' if freeipa_client_make_home_dir else '' }}
+    {{ '--request-cert' if freeipa_client_request_cert else '' }}
+  args:
+    creates: /etc/ipa/default.conf
