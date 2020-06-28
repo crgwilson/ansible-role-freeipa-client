@@ -16,3 +16,5 @@ freeipa_client_ssh_trust_dns: true
 freeipa_client_configure_sudo: true
 freeipa_client_make_home_dir: true
 freeipa_client_request_cert: true
+freeipa_client_force: false
+freeipa_client_force_join: false

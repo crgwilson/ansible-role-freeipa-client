@@ -29,5 +29,8 @@
     {{ '--no-sudo' if not freeipa_client_configure_sudo else '' }}
     {{ '--mkhomedir' if freeipa_client_make_home_dir else '' }}
     {{ '--request-cert' if freeipa_client_request_cert else '' }}
+    {{ '--force' if freeipa_client_force else '' }}
+    {{ '--force-join' if freeipa_client_force_join else '' }}
+    --unattended
   args:
     creates: /etc/ipa/default.conf
